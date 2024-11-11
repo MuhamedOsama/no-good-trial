@@ -154,6 +154,39 @@ This command will:
 2. **Volume Mount in Docker Compose**:
    - We mount `nginx-local.conf` to override `nginx.conf` only in the Docker Compose environment, ensuring a smooth setup for local development.
 
+Here's a **Todo Section** to add to your PR description:
+
+---
+
+## Todo
+
+1. **Implement Background Processing with Bull and Redis**
+
+   - Set up `bull` and Redis to handle the bulk insertion of datasets into MongoDB in the background. This will improve request performance by offloading the lengthy insertion process.
+
+2. **Environment Variable Management with nestjs/config**
+
+   - Integrate `nestjs/config` to handle environment variables, specifically for MongoDB connection details and other configurable parameters.
+
+3. **API Validation Enhancements**
+
+   - Add validation checks for API endpoints, such as ensuring the `startDate` is not later than the `endDate`. This will enforce data integrity and prevent logical errors.
+
+4. **Improve Swagger Documentation**
+
+   - Enhance Swagger documentation by utilizing its decorators for comprehensive and clear API endpoint descriptions, parameter details, and expected responses.
+
+5. **Debug GitHub Actions Workflow**
+
+   - Investigate and debug the GitHub Actions workflow to ensure successful deployment to Digital Ocean. Address any issues with deployment configurations or permissions.
+
+6. **Responsive Design Improvements**
+
+   - Address responsiveness in the client-side application to ensure a consistent user experience across various devices, especially mobile and tablet views.
+
+7. **ReadMe and Documentation Updates**
+   - Continue updating the README and documentation, including Docker setup and Docker Compose configurations, to reflect recent changes and guide new users through setup and deployment.
+
 ---
 
 ## Conclusion
