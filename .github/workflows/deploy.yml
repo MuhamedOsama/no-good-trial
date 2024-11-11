@@ -1,0 +1,42 @@
+name: Deploy Application
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push API image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./api
+          push: true
+          tags: yourusername/api:latest
+
+      - name: Build and push Client image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./client
+          push: true
+          tags: yourusername/client:latest
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /path/to/your/app
+            docker-compose pull
+            docker-compose up -d
