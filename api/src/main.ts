@@ -12,7 +12,7 @@ async function bootstrap() {
     .addTag('campaigns')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('swagger', app, document);
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
   app.enableCors();
