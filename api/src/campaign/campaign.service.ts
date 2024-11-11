@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { Campaign } from './entities/campaign.entity';
 import { CampaignDocument } from './entities/campaign.schema';
 
@@ -110,5 +110,44 @@ export class CampaignService {
   }
   async getXyzCampaignsIds(): Promise<number[]> {
     return this.campaignModel.distinct('xyzCampaignId').exec();
+  }
+  async getGroupedOldCampaigns() {
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // Find all old campaigns
+    const oldCampaigns = await this.campaignModel
+      .find({ endDate: { $lt: thirtyDaysAgo } })
+      .exec();
+
+    // Group campaigns by xyzCampaignId and fbCampaignId
+    const groupedCampaigns = oldCampaigns.reduce((groups, campaign) => {
+      const { xyzCampaignId, fbCampaignId } = campaign;
+      const xyzKey = `xyz-${xyzCampaignId}`;
+      const fbKey = `fb-${fbCampaignId}`;
+      if (!groups[xyzKey]) {
+        groups[xyzKey] = {
+          campaignType: 'xyz',
+          campaigns: [],
+        };
+      }
+      if (!groups[fbKey]) {
+        groups[fbKey] = {
+          campaignType: 'fb',
+          campaigns: [],
+        };
+      }
+
+      groups[xyzKey].campaigns.push(campaign);
+      groups[fbKey].campaigns.push(campaign);
+
+      return groups;
+    }, {});
+
+    return Object.values(groupedCampaigns);
+  }
+
+  async deleteCampaignsByIds(campaignIds: string[]): Promise<void> {
+    await this.campaignModel.deleteMany({ _id: { $in: campaignIds } }).exec();
   }
 }
