@@ -7,4 +7,4 @@ COPY . .
 RUN yarn run build
 
 EXPOSE 4000
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "run", "start:prod"]
