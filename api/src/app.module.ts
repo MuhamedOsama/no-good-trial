@@ -6,7 +6,9 @@ import { CampaignModule } from './campaign/campaign.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/no-good-trial'),
+    MongooseModule.forRoot(
+      'mongodb+srv://admin:m1i2d3o40@cluster0.9psumlp.mongodb.net/no-good-trial',
+    ),
     CampaignModule,
   ],
   controllers: [AppController],
