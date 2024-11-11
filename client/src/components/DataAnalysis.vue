@@ -468,9 +468,7 @@ export default {
       this.isLoadingData = true;
       const campaignTimeseriesData = await apiService.get(
         `/campaigns/${
-          this.selectedCampaignType.toLowerCase() === "fbCampaignId"
-            ? "facebook"
-            : "xyz"
+          this.selectedCampaignType === "fbCampaignId" ? "facebook" : "xyz"
         }/${this.id}`
       );
       this.campaignData = campaignTimeseriesData;

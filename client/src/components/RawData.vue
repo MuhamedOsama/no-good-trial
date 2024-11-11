@@ -63,7 +63,7 @@ export default {
   name: "RawData",
   mounted() {
     this.loading = true;
-    const campaignAggregateData = apiService.get(`/campaigns`).then((r) => {
+    apiService.get(`/campaigns`).then((r) => {
       this.dataset = r;
       this.loading = false;
     });
