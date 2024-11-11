@@ -4,6 +4,9 @@
 
 This project is a comprehensive marketing campaign performance dashboard, designed to help users analyze and visualize their marketing campaign data. The application consists of two main components: the API, built with NestJS, and the client, built with Vue 3 and Vuetify.
 
+- **[App](https://urchin-app-asiv2.ondigitalocean.app/)**: User interface for interacting with the dashboard.
+- **[API Documentation (Swagger)](https://urchin-app-asiv2.ondigitalocean.app/api/swagger)**: Interactive documentation for testing and exploring API endpoints.
+
 ## Design Decisions
 
 ### Backend (API)
