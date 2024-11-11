@@ -17,6 +17,7 @@ class ApiService {
   private client: AxiosInstance;
 
   constructor() {
+    console.log(import.meta.env.VITE_API_URL);
     this.client = axios.create({
       baseURL: import.meta.env.VITE_API_URL || "http://localhost:4000",
       headers: {
