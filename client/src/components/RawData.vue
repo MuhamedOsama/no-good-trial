@@ -62,7 +62,6 @@ import { apiService } from "@/services/api.service";
 export default {
   name: "RawData",
   mounted() {
-    console.log("RawData mounted");
     this.loading = true;
     const campaignAggregateData = apiService.get(`/campaigns`).then((r) => {
       this.dataset = r;
