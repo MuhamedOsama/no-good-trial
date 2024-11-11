@@ -5,6 +5,8 @@ import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
+
   const config = new DocumentBuilder()
     .setTitle('Nogood Trial API')
     .setDescription('The trial API description')
