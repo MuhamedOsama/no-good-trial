@@ -5,12 +5,13 @@ import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
     .setTitle('Nogood Trial API')
     .setDescription('The trial API description')
     .setVersion('1.0')
+    .addServer('/')
+    .addServer('/api')
     .addTag('campaigns')
     .build();
   const document = SwaggerModule.createDocument(app, config);
